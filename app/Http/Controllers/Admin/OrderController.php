@@ -1,0 +1,70 @@
+<?php
+// app/Http/Controllers/Admin/OrderController.php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\Order;
+use Illuminate\Http\Request;
+
+class OrderController extends Controller
+{
+    public function index(Request $request)
+    {
+        $query = Order::with('user', 'payment');
+
+        // Filter by status
+        if ($request->has('status') && $request->status != '') {
+            $query->where('status', $request->status);
+        }
+
+        // Filter by date range
+        if ($request->has('date_from') && $request->date_from != '') {
+            $query->whereDate('created_at', '>=', $request->date_from);
+        }
+        if ($request->has('date_to') && $request->date_to != '') {
+            $query->whereDate('created_at', '<=', $request->date_to);
+        }
+
+        // Search by order ID or customer name
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('id', 'LIKE', "%{$search}%")
+                  ->orWhereHas('user', function($userQuery) use ($search) {
+                      $userQuery->where('name', 'LIKE', "%{$search}%")
+                                ->orWhere('email', 'LIKE', "%{$search}%");
+                  });
+            });
+        }
+
+        $orders = $query->latest()->paginate(10);
+
+        return view('admin.orders.index', compact('orders'));
+    }
+
+    public function show(Order $order)
+    {
+        $order->load('user', 'items.product', 'payment');
+        return view('admin.orders.show', compact('order'));
+    }
+
+    public function updateStatus(Request $request, Order $order)
+    {
+        $request->validate([
+            'status' => 'required|in:pending,paid,done,cancelled'
+        ]);
+
+        $order->update(['status' => $request->status]);
+
+        // Update payment status if order is paid
+        if ($request->status == 'paid' && $order->payment) {
+            $order->payment->update([
+                'payment_status' => 'success',
+                'paid_at' => now()
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Order status updated successfully');
+    }
+}
