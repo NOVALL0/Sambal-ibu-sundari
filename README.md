@@ -1,4 +1,4 @@
-#  Sambal Kitchen - Aplikasi E-Commerce Sambal
+#  Sambal Ibu Sundari - Website online shop Sambal
 
 ![Laravel](https://img.shields.io/badge/Laravel-11-red)
 ![PHP](https://img.shields.io/badge/PHP-8.2-purple)
@@ -6,23 +6,8 @@
 ![Tailwind](https://img.shields.io/badge/Tailwind-CSS-06B6D4)
 ![Alpine.js](https://img.shields.io/badge/Alpine.js-3.x-green)
 ![Midtrans](https://img.shields.io/badge/Midtrans-Payment%20Gateway-orange)
+Website online shop untuk penjualan sambal rumahan dengan sistem pembayaran terintegrasi Midtrans.
 
-Aplikasi e-commerce untuk penjualan sambal rumahan dengan sistem pembayaran terintegrasi Midtrans.
-
-## Daftar Isi
-- [Fitur Utama](#-fitur-utama)
-- [Teknologi yang Digunakan](#-teknologi-yang-digunakan)
-- [Persyaratan Sistem](#-persyaratan-sistem)
-- [Instalasi](#-instalasi)
-- [Konfigurasi](#-konfigurasi)
-- [Menjalankan Aplikasi](#-menjalankan-aplikasi)
-- [Struktur Database](#-struktur-database)
-- [API Documentation](#-api-documentation)
-- [Testing dengan Postman](#-testing-dengan-postman)
-- [Midtrans Integration](#-midtrans-integration)
-- [Troubleshooting](#-troubleshooting)
-- [Kontribusi](#-kontribusi)
-- [Lisensi](#-lisensi)
 
 ## Fitur Utama
 
@@ -69,9 +54,9 @@ Aplikasi e-commerce untuk penjualan sambal rumahan dengan sistem pembayaran teri
 - Web Server (Apache/Nginx) atau Laravel Herd
 - Akun Midtrans (untuk payment gateway)
 
-## 📦 Instalasi
+##  Instalasi
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/username/sambal-kitchen.git
-cd sambal-kitchen
+https://github.com/NOVALL0/Sambal-ibu-sundari.git
+cd sambal-ibu-sundari
